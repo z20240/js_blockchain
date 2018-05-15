@@ -10,16 +10,16 @@ class Block {
          * 如果需要使用相同的金鑰加密一個以上的訊息，就需要Nonce來確保不同的訊息與該金鑰加密的金鑰流不同。
          */
         this.nonce = 0;
-        this.transations = [];
+        this.transactions = [];
     }
 
     get key() {
-        // key  主要由四個部分構成 transations, index, previousHash, nonce
-        return JSON.stringify(this.transations) + this.index + this.previousHash + this.nonce;
+        // key  主要由四個部分構成 transactions, index, previousHash, nonce
+        return JSON.stringify(this.transactions) + this.index + this.previousHash + this.nonce;
     }
 
     addTransaction(transation) {
-        this.transations.push(transation);
+        this.transactions.push(transation);
     }
 }
 
