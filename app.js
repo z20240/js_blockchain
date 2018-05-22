@@ -6,6 +6,7 @@ let Block = require('./block');
 let Blockchain = require('./blockchain');
 let BlockchainNode = require('./blockchainNode');
 let Transaction = require('./transaction');
+let Axios = require('axios');
 
 app.use(express.json());
 app.use(bodyParser.json());
@@ -78,6 +79,18 @@ app.post('/mining', function (req, res) {
     transactions = [];
     res.json(block);
 });
+
+
+app.get('/resolve', function (req, res) {
+    console.log("1", blockchain);
+    nodes.forEach((node) => {
+        console.log("2", node.url + '/blockchain');
+        Axios.get(node.url + '/blockchain').then((result) => {
+            console.log("3", result.data);
+            res.json(result.data); // 這邊送了兩次
+        });
+    })
+})
 
 
 app.listen(port, function() {
